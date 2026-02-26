@@ -2,6 +2,7 @@
 @section('title', 'Home')
 @push('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets0/css/owl.carousel.min.css') }}">
 @endpush
 
 @section('content')
@@ -151,13 +152,13 @@
                         <h2 class="display-6 fw-light mt-2">{{ __('Official collaborations & optical partners') }}</h2>
                     </div>
                 </div>
-                <div class="row g-4 justify-content-center">
+                <div class="owl-carousel partners-carousel">
                     @foreach ($collectionBanners as $banner)
                         @php
                             $brandLabel = $banner->brand ?? $banner->title ?? __('Partner');
                         @endphp
-                        <div class="col-6 col-md-4 col-lg-3 col-xl-2">
-                            <div class="border rounded-4 p-4 bg-white shadow-sm h-100 d-flex align-items-center justify-content-center">
+                        <div class="partner-slide text-center">
+                            <div class="partner-card border rounded-4 p-4 bg-white shadow-sm d-flex align-items-center justify-content-center">
                                 @if (!empty($banner->url))
                                     <a href="{{ $banner->url }}" target="_blank" rel="noopener" class="d-block">
                                         <img src="{{ asset($banner->image) }}" alt="{{ $brandLabel }}" class="img-fluid">
@@ -167,7 +168,7 @@
                                 @endif
                             </div>
                             @if ($brandLabel)
-                                <p class="text-center text-muted small mt-2 mb-0">{{ $brandLabel }}</p>
+                                <p class="partner-label text-muted small mt-2 mb-0">{{ $brandLabel }}</p>
                             @endif
                         </div>
                     @endforeach
@@ -231,6 +232,7 @@
 @endsection
 
 @push('js')
+    <script src="{{ asset('frontend/assets0/owl.carousel.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 
@@ -616,6 +618,29 @@
 
     <script>
         $(document).ready(function() {
+            var $partnersCarousel = $('.partners-carousel');
+            if ($partnersCarousel.length) {
+                var partnerCount = $partnersCarousel.find('.partner-slide').length;
+                $partnersCarousel.owlCarousel({
+                    items: 6,
+                    loop: partnerCount > 6,
+                    margin: 24,
+                    autoplay: true,
+                    autoplayTimeout: 2500,
+                    autoplayHoverPause: true,
+                    smartSpeed: 600,
+                    dots: false,
+                    nav: false,
+                    responsive: {
+                        0: { items: 2 },
+                        576: { items: 3 },
+                        768: { items: 4 },
+                        992: { items: 5 },
+                        1200: { items: 6 }
+                    }
+                });
+            }
+
             $('.owl-carousel').show();
             $('.product_slider_sell').owlCarousel({
                 items: 1,

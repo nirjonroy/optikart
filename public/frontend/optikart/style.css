@@ -530,6 +530,37 @@ img.logo-image:hover {
     filter: contrast(0);
 }
 
+/*----- Partners Carousel -------------------------*/
+
+.partners-carousel .owl-stage {
+    display: flex;
+}
+
+.partners-carousel .owl-item {
+    display: flex;
+    align-items: stretch;
+}
+
+.partners-carousel .partner-slide {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.partners-carousel .partner-card {
+    height: 140px;
+    background: #fff;
+}
+
+.partners-carousel .partner-card img {
+    max-height: 72px;
+    width: auto;
+}
+
+.partners-carousel .partner-label {
+    color: #6c757d;
+}
+
 /*----- New Arrival Section Style -------------------------*/
 
 .product-store .product-item {
