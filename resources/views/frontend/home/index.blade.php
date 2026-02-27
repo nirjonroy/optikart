@@ -23,16 +23,18 @@
                                     @php
                                         $slideTitle = $slide->title ?? $slide->title_one ?? __('Frame Your Style');
                                         $slideDescription = $slide->description ?? $slide->title_two ?? __('Elevate your looks with spectacular shades');
-                                        $slideButtonText = !empty($slide->btn_text) ? $slide->btn_text : __('Start Shopping');
+                                        $slideButtonText = !empty($slide->btn_text) ? $slide->btn_text : null;
                                         $slideButtonLink = !empty($slide->btn_link) ? $slide->btn_link : route('front.shop');
                                     @endphp
                                     <h2 class="display-1 text-uppercase text-white mt-3">{{ $slideTitle }}</h2>
                                     <p class="text-capitalize text-white fs-5 mb-4">
                                         {{ $slideDescription }}
                                     </p>
-                                    <a href="{{ $slideButtonLink }}" class="btn btn-outline-light btn-wrap">
-                                        {{ $slideButtonText }}
-                                    </a>
+                                    @if (!empty($slideButtonText))
+                                        <a href="{{ $slideButtonLink }}" class="btn btn-outline-light btn-wrap">
+                                            {{ $slideButtonText }}
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -54,6 +56,8 @@
                 @endforelse
             </div>
             <div class="swiper-pagination swiper-pagination-slideshow "></div>
+            <div class="swiper-button-prev slider-nav-btn" aria-label="Previous slide"></div>
+            <div class="swiper-button-next slider-nav-btn" aria-label="Next slide"></div>
         </div>
     </section>
 

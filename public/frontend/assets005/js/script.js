@@ -72,20 +72,27 @@
         })
 
         // swiper slider home 2
-        var swiper = new Swiper(".slideshow", {
-            slidesPerView: 1,
-            spaceBetween: 0,
-            speed: 1000,
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.icon-arrow-right',
-                prevEl: '.icon-arrow-left',
-            }
-        });
+        var slideshowEl = document.querySelector(".slideshow");
+        if (slideshowEl) {
+            var swiper = new Swiper(slideshowEl, {
+                slidesPerView: 1,
+                spaceBetween: 0,
+                speed: 1000,
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: slideshowEl.querySelector(".swiper-pagination"),
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: slideshowEl.querySelector(".swiper-button-next"),
+                    prevEl: slideshowEl.querySelector(".swiper-button-prev"),
+                }
+            });
+        }
 
         // product single page
         var thumb_slider = new Swiper(".product-thumbnail-slider", {

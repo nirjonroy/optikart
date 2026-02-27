@@ -25,7 +25,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $slider = Slider::where('status', 1)->get();
+        $slider = Slider::where('status', 1)
+            ->orderBy('serial')
+            ->get();
         $home_bottom_settings = HomeBottomSetting::all();
         $offer = AboutUs::find('2');
         $feateuredCategories = featuredCategories();
