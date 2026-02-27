@@ -61,6 +61,7 @@ use App\Http\Controllers\WEB\Admin\HomepageVisibilityController;
 use App\Http\Controllers\WEB\Admin\MenuVisibilityController;
 use App\Http\Controllers\WEB\Admin\LanguageController;
 use App\Http\Controllers\WEB\Admin\AdvertisementController;
+use App\Http\Controllers\WEB\Admin\GalleryController;
 use App\Http\Controllers\WEB\Admin\FlashSaleController;
 use App\Http\Controllers\WEB\Admin\InventoryController;
 use App\Http\Controllers\WEB\Admin\NotificationController;
@@ -106,6 +107,7 @@ use App\Http\Controllers\WEB\Frontend\Auth\AuthController as FrontAuthController
 use App\Http\Controllers\WEB\Frontend\Blog\BlogController as BlogBlogController;
 use App\Http\Controllers\WEB\Frontend\AboutController as FrontAboutController;
 use App\Http\Controllers\WEB\Frontend\ContactController as FrontContactController;
+use App\Http\Controllers\WEB\Frontend\GalleryController as FrontGalleryController;
 use App\Http\Controllers\WEB\Frontend\HomeController as FrontHomeController;
 use App\Http\Controllers\WEB\Frontend\AppointmentController as FrontAppointmentController;
 use App\Http\Controllers\WEB\Frontend\ProductController as FrontProductController;
@@ -707,6 +709,8 @@ Route::group(['middleware' => ['demo', 'XSS']], function () {
 
         Route::resource('slider', SliderController::class);
         Route::put('slider-status/{id}', [SliderController::class, 'changeStatus'])->name('slider-status');
+        Route::resource('gallery', GalleryController::class);
+        Route::put('gallery-status/{id}', [GalleryController::class, 'changeStatus'])->name('gallery-status');
 
         Route::get('pc_builders', [HomePageController::class, 'pcBuilders'])->name('pc-builder');
         Route::get('popular-category', [HomePageController::class, 'popularCategory'])->name('popular-category');
@@ -865,6 +869,7 @@ Auth::routes();
 
 Route::group(['as' => 'front.'], function () {
     Route::get('/about', [FrontAboutController::class, 'index'])->name('about');
+    Route::get('/gallery', [FrontGalleryController::class, 'index'])->name('gallery');
     Route::get('/contact', [FrontContactController::class, 'index'])->name('contact');
     Route::post('/contact', [FrontContactController::class, 'submit'])->name('contact.submit');
 

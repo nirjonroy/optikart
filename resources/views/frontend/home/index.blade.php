@@ -181,6 +181,34 @@
         </section>
     @endif
 
+    @if ($galleryItems->isNotEmpty())
+        <section id="home-gallery" class="padding-medium bg-light">
+            <div class="container-fluid px-3 px-md-5">
+                <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <span class="text-uppercase text-primary fw-semibold">{{ __('Gallery') }}</span>
+                        <h2 class="display-5 fw-light text-uppercase m-0">{{ __('Latest moments') }}</h2>
+                    </div>
+                    <a href="{{ route('front.gallery') }}" class="btn btn-outline-dark py-3 px-5">
+                        {{ __('View all') }}
+                    </a>
+                </div>
+                <div class="row g-4 gallery-grid home-gallery-grid">
+                    @foreach ($galleryItems as $item)
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <a href="{{ asset($item->image) }}" class="image-link gallery-card d-block">
+                                <img src="{{ asset($item->image) }}" alt="{{ $item->caption ?? __('Gallery image') }}" class="img-fluid w-100">
+                            </a>
+                            @if ($item->caption)
+                                <p class="text-center text-muted small mt-2 mb-0">{{ $item->caption }}</p>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
     @if ($latestBlogs->isNotEmpty())
         <section id="blog" class="padding-medium pt-0">
             <div class="container-fluid px-3 px-md-5">

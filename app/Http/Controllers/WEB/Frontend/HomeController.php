@@ -16,6 +16,7 @@ use App\Models\CollectionBanner;
 use App\Models\FlashSaleProduct;
 use App\Models\FooterLink;
 use App\Models\Footer;
+use App\Models\Gallery;
 use App\Models\HomeBottomSetting;
 use DB;
 use App\Models\CustomPage;
@@ -150,6 +151,11 @@ class HomeController extends Controller
         $collectionBanner2 = CollectionBanner::where('status', 1)->skip(1)->first();
         $collectionBanner3 = CollectionBanner::where('status', 1)->skip(2)->first();
 
+        $galleryItems = Gallery::where('status', 1)
+            ->latest()
+            ->take(9)
+            ->get();
+
         $latestBlogs = Blog::with('category', 'comments')->latest()->limit(5)->get();
         $testimonials = Testimonial::all();
 
@@ -179,6 +185,7 @@ class HomeController extends Controller
             'collectionBanner2',
             'collectionBanner3',
             'collectionBanners',
+            'galleryItems',
             'latestBlogs',
             'hotDeals',
             'onSale',

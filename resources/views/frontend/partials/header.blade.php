@@ -406,6 +406,12 @@
                         </li>
 
                         <li class="nav-item">
+                            <a href="{{ route('front.gallery') }}" class="nav-link mx-2 {{ request()->routeIs('front.gallery') ? 'active' : '' }}">
+                                {{ __('Gallery') }}
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a href="{{ route('front.contact') }}" class="nav-link mx-2 {{ request()->routeIs('front.contact') ? 'active' : '' }}">
                                 {{ __('Contact') }}
                             </a>

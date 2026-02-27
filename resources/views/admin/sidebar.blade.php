@@ -591,6 +591,8 @@
                             <li class="{{ Route::is('admin.slider.*') ? 'active' : '' }}"><a class="nav-link"
                                     href="{{ route('admin.slider.index') }}">{{ __('admin.Slider') }}</a></li>
                         @endif
+                        <li class="{{ Route::is('admin.gallery.*') ? 'active' : '' }}"><a class="nav-link"
+                                href="{{ route('admin.gallery.index') }}">{{ __('Gallery') }}</a></li>
                         <li class="{{ Route::is('admin.social-link.*') ? 'active' : '' }}"><a class="nav-link"
                                 href="{{ route('admin.social-link.index') }}">{{ __('admin.Social Link') }}</a>
                         </li>
