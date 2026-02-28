@@ -26,22 +26,15 @@ class CollectionBannerController extends Controller
         $imageName = uniqid() . "_collection_banner" . "." . $image->getClientOriginalExtension();
         $image->move(public_path('uploads/collection-banner/'), $imageName);
         $imagePath = "uploads/collection-banner/" . $imageName;
-        $item = CollectionBanner::where('status', 1)->get();
+        CollectionBanner::create([
+            'brand' => $request->input('brand'),
+            'title' => $request->input('title'),
+            'url' => $request->input('url'),
+            'image' => $imagePath,
+            'discount_text' => $request->input('discount_text'),
+        ]);
 
-        // if item is less than 3 then only add the collection
-        if ($item->count() < 10) {
-            CollectionBanner::create([
-                'brand' => $request->input('brand'),
-                'title' => $request->input('title'),
-                'url' => $request->input('url'),
-                'image' => $imagePath,
-                'discount_text' => $request->input('discount_text'),
-            ]);
-
-            return redirect()->route('admin.about-us.index')->with('success', 'Collection Banner Added Successfully!');
-        } else {
-            return redirect()->route('admin.about-us.index')->with('error', 'You can add only 3 Collection Banner');
-        }
+        return redirect()->route('admin.about-us.index')->with('success', 'Collection Banner Added Successfully!');
     }
 
 

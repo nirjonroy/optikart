@@ -61,14 +61,17 @@ use App\Http\Controllers\WEB\Admin\HomepageVisibilityController;
 use App\Http\Controllers\WEB\Admin\MenuVisibilityController;
 use App\Http\Controllers\WEB\Admin\LanguageController;
 use App\Http\Controllers\WEB\Admin\AdvertisementController;
+use App\Http\Controllers\WEB\Admin\BankingPartnerController;
 use App\Http\Controllers\WEB\Admin\GalleryController;
 use App\Http\Controllers\WEB\Admin\FlashSaleController;
 use App\Http\Controllers\WEB\Admin\InventoryController;
+use App\Http\Controllers\WEB\Admin\InvestorController;
 use App\Http\Controllers\WEB\Admin\NotificationController;
 use App\Http\Controllers\WEB\Admin\LandingPageController;
 use App\Http\Controllers\WEB\Admin\AppointmentController as AdminAppointmentController;
 use App\Http\Controllers\WEB\Admin\AppointmentPageController;
 use App\Http\Controllers\WEB\Admin\HomeBottomSettingController;
+use App\Http\Controllers\WEB\Admin\TeamMemberController;
 
 use App\Http\Controllers\WEB\Admin\IPBlockController;
 use App\Http\Controllers\WEB\Admin\AttributeController;
@@ -709,6 +712,12 @@ Route::group(['middleware' => ['demo', 'XSS']], function () {
 
         Route::resource('slider', SliderController::class);
         Route::put('slider-status/{id}', [SliderController::class, 'changeStatus'])->name('slider-status');
+        Route::resource('banking-partner', BankingPartnerController::class);
+        Route::put('banking-partner-status/{id}', [BankingPartnerController::class, 'changeStatus'])->name('banking-partner-status');
+        Route::resource('investor', InvestorController::class);
+        Route::put('investor-status/{id}', [InvestorController::class, 'changeStatus'])->name('investor-status');
+        Route::resource('team-member', TeamMemberController::class);
+        Route::put('team-member-status/{id}', [TeamMemberController::class, 'changeStatus'])->name('team-member-status');
         Route::resource('gallery', GalleryController::class);
         Route::put('gallery-status/{id}', [GalleryController::class, 'changeStatus'])->name('gallery-status');
 

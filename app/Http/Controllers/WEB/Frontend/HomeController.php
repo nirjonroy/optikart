@@ -10,6 +10,7 @@ use App\Models\SubCategory;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\AboutUs;
+use App\Models\BankingPartner;
 use App\Models\Blog;
 use App\Models\ChildCategory;
 use App\Models\CollectionBanner;
@@ -18,9 +19,11 @@ use App\Models\FooterLink;
 use App\Models\Footer;
 use App\Models\Gallery;
 use App\Models\HomeBottomSetting;
+use App\Models\Investor;
 use DB;
 use App\Models\CustomPage;
 use App\Models\Testimonial;
+use App\Models\TeamMember;
 
 class HomeController extends Controller
 {
@@ -151,6 +154,10 @@ class HomeController extends Controller
         $collectionBanner2 = CollectionBanner::where('status', 1)->skip(1)->first();
         $collectionBanner3 = CollectionBanner::where('status', 1)->skip(2)->first();
 
+        $bankingPartners = BankingPartner::where('status', 1)->latest()->get();
+        $investors = Investor::where('status', 1)->latest()->get();
+        $teamMembers = TeamMember::where('status', 1)->latest()->get();
+
         $galleryItems = Gallery::where('status', 1)
             ->latest()
             ->take(9)
@@ -185,6 +192,9 @@ class HomeController extends Controller
             'collectionBanner2',
             'collectionBanner3',
             'collectionBanners',
+            'bankingPartners',
+            'investors',
+            'teamMembers',
             'galleryItems',
             'latestBlogs',
             'hotDeals',

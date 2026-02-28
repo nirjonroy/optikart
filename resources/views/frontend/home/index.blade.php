@@ -181,6 +181,98 @@
         </section>
     @endif
 
+    @if ($bankingPartners->isNotEmpty())
+        <section id="banking-partners" class="padding-medium">
+            <div class="container-fluid px-3 px-md-5">
+                <div class="row justify-content-center text-center mb-4">
+                    <div class="col-lg-8">
+                        <span class="text-uppercase text-primary fw-semibold">{{ __('Banking Partners') }}</span>
+                        <h2 class="display-6 fw-light mt-2">{{ __('Trusted banking collaborations') }}</h2>
+                    </div>
+                </div>
+                <div class="owl-carousel banking-carousel">
+                    @foreach ($bankingPartners as $partner)
+                        <div class="partner-slide text-center">
+                            <div class="partner-card border rounded-4 p-4 bg-white shadow-sm d-flex align-items-center justify-content-center">
+                                @if (!empty($partner->url))
+                                    <a href="{{ $partner->url }}" target="_blank" rel="noopener" class="d-block">
+                                        <img src="{{ asset($partner->logo) }}" alt="{{ $partner->name }}" class="img-fluid">
+                                    </a>
+                                @else
+                                    <img src="{{ asset($partner->logo) }}" alt="{{ $partner->name }}" class="img-fluid">
+                                @endif
+                            </div>
+                            <p class="partner-label text-muted small mt-2 mb-0">{{ $partner->name }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if ($investors->isNotEmpty())
+        <section id="investors" class="padding-medium bg-light">
+            <div class="container-fluid px-3 px-md-5">
+                <div class="row justify-content-center text-center mb-4">
+                    <div class="col-lg-8">
+                        <span class="text-uppercase text-primary fw-semibold">{{ __('Investors') }}</span>
+                        <h2 class="display-6 fw-light mt-2">{{ __('Backed by visionary partners') }}</h2>
+                    </div>
+                </div>
+                <div class="owl-carousel investor-carousel">
+                    @foreach ($investors as $investor)
+                        <div class="partner-slide text-center">
+                            <div class="partner-card border rounded-4 p-4 bg-white shadow-sm d-flex align-items-center justify-content-center">
+                                @if (!empty($investor->url))
+                                    <a href="{{ $investor->url }}" target="_blank" rel="noopener" class="d-block">
+                                        <img src="{{ asset($investor->logo) }}" alt="{{ $investor->name }}" class="img-fluid">
+                                    </a>
+                                @else
+                                    <img src="{{ asset($investor->logo) }}" alt="{{ $investor->name }}" class="img-fluid">
+                                @endif
+                            </div>
+                            <p class="partner-label text-muted small mt-2 mb-0">{{ $investor->name }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if ($teamMembers->isNotEmpty())
+        <section id="team" class="padding-medium">
+            <div class="container-fluid px-3 px-md-5">
+                <div class="row justify-content-center text-center mb-4">
+                    <div class="col-lg-8">
+                        <span class="text-uppercase text-primary fw-semibold">{{ __('Team') }}</span>
+                        <h2 class="display-6 fw-light mt-2">{{ __('Meet the people behind Opticart') }}</h2>
+                    </div>
+                </div>
+                <div class="owl-carousel team-carousel">
+                    @foreach ($teamMembers as $member)
+                        <div class="team-slide">
+                            <div class="team-card text-center h-100">
+                                <div class="team-photo">
+                                    @if (!empty($member->url))
+                                        <a href="{{ $member->url }}" target="_blank" rel="noopener">
+                                            <img src="{{ asset($member->photo) }}" alt="{{ $member->name }}" class="img-fluid">
+                                        </a>
+                                    @else
+                                        <img src="{{ asset($member->photo) }}" alt="{{ $member->name }}" class="img-fluid">
+                                    @endif
+                                </div>
+                                <div class="team-info">
+                                    <h3 class="h5 fw-semibold text-dark mb-1">{{ $member->name }}</h3>
+                                    <p class="text-muted small mb-0">{{ $member->role }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
     @if ($galleryItems->isNotEmpty())
         <section id="home-gallery" class="padding-medium bg-light">
             <div class="container-fluid px-3 px-md-5">
@@ -669,6 +761,71 @@
                         768: { items: 4 },
                         992: { items: 5 },
                         1200: { items: 6 }
+                    }
+                });
+            }
+
+            var $bankingCarousel = $('.banking-carousel');
+            if ($bankingCarousel.length) {
+                var bankingCount = $bankingCarousel.find('.partner-slide').length;
+                $bankingCarousel.owlCarousel({
+                    items: 5,
+                    loop: bankingCount > 5,
+                    margin: 24,
+                    autoplay: true,
+                    autoplayTimeout: 2500,
+                    autoplayHoverPause: true,
+                    smartSpeed: 600,
+                    dots: false,
+                    nav: false,
+                    responsive: {
+                        0: { items: 2 },
+                        576: { items: 3 },
+                        768: { items: 4 },
+                        992: { items: 5 }
+                    }
+                });
+            }
+
+            var $investorCarousel = $('.investor-carousel');
+            if ($investorCarousel.length) {
+                var investorCount = $investorCarousel.find('.partner-slide').length;
+                $investorCarousel.owlCarousel({
+                    items: 5,
+                    loop: investorCount > 5,
+                    margin: 24,
+                    autoplay: true,
+                    autoplayTimeout: 2600,
+                    autoplayHoverPause: true,
+                    smartSpeed: 600,
+                    dots: false,
+                    nav: false,
+                    responsive: {
+                        0: { items: 2 },
+                        576: { items: 3 },
+                        768: { items: 4 },
+                        992: { items: 5 }
+                    }
+                });
+            }
+
+            var $teamCarousel = $('.team-carousel');
+            if ($teamCarousel.length) {
+                var teamCount = $teamCarousel.find('.team-slide').length;
+                $teamCarousel.owlCarousel({
+                    items: 3,
+                    loop: teamCount > 3,
+                    margin: 24,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    autoplayHoverPause: true,
+                    smartSpeed: 600,
+                    dots: true,
+                    nav: false,
+                    responsive: {
+                        0: { items: 1 },
+                        576: { items: 2 },
+                        992: { items: 3 }
                     }
                 });
             }
